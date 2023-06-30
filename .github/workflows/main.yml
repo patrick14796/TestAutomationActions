@@ -15,7 +15,13 @@ jobs:
 
       - name: Print pushed file name
         run: |
-          echo "Pushed file:"
-          for chenged_file in ${{ steps.files.outputs.all}}; do
-            echo "Changed files: ${chenged_file}"
+          echo "Pushed files:"
+          for changed_file in ${{ steps.files.outputs.all}}; do
+            echo "Changed file: ${changed_file}"
+            if file -b "${changed_file}" | grep -q "text"; then
+              echo "The file '${changed_file}' is a text file."
+            else
+              echo "The file '${changed_file}' is not a text file."
+              # Handle the case when the file is not a text file
+            fi
           done
