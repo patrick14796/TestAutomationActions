@@ -16,8 +16,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Print changed files
+    - name: List all changed files
       run: |
-        for file in $(git diff --name-only HEAD~1..HEAD); do
-          echo "File: ${GITHUB_WORKSPACE}/$file"
+        for file in ${{ steps.changed-directories.outputs.all_changed_and_modified_files }}; do
+          echo $file
         done
