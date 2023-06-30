@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
       - uses: actions/checkout@v2.1.0
       - uses: jitterbit/get-changed-files@v1
+        id: files
 
       - name: Print pushed file name
         run: |
