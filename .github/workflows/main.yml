@@ -16,14 +16,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Check if files are text files
+    - name: Print changed files
       run: |
-        for file in ${{ github.event.head_commit.added }}; do
-          echo "File: $file"
-          if [[ $(file -b "${GITHUB_WORKSPACE}/$file") == "ASCII text"* ]]; then
-            echo "The file is a text file."
-          else
-            echo "The file is not a text file."
-            exit 1
-          fi
-        done
+        git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
