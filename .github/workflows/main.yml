@@ -15,4 +15,4 @@ jobs:
       - name: Print pushed file name
         run: |
           echo "Pushed file:"
-          git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | tail -n 1
+          echo "${{ github.event.head_commit.modified[0] }}"
