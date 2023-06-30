@@ -18,7 +18,7 @@ jobs:
     
     - name: Check if file is a text file
       run: |
-        if [[ $(file -b "${GITHUB_WORKSPACE}/${{ github.event.head_commit.modified[0] }}") == "ASCII text"* ]]; then
+        if [[ $(file -b "${GITHUB_WORKSPACE}/${{ github.event.head_commit.added[0] }}") == "ASCII text"* ]]; then
           echo "The file is a text file."
         else
           echo "The file is not a text file."
