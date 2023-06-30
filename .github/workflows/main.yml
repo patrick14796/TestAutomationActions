@@ -1,18 +1,18 @@
-name: Print Pushed File Names
+name: Print All Files
 on:
   push:
     branches:
       - main # Replace with your desired branch
 
 jobs:
-  print-file-names:
+  print-files:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Print file names
+      - name: Print all files
         run: |
-          echo "Pushed files:"
-          git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
+          echo "All files in the repository:"
+          find . -type f
