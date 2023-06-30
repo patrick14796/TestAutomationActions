@@ -10,9 +10,11 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2.1.0
+      - uses: jitterbit/get-changed-files@v1
 
       - name: Print pushed file name
         run: |
           echo "Pushed file:"
-          echo "${{ github.event.head_commit.modified[0] }}"
+          for chenged_file in ${{ steps.files.outputs.all}}; do
+            echo "Changed files: ${chenged_file}"
