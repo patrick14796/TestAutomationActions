@@ -13,5 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Display a message
-      run: echo "Workflow completed successfully!"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Check if files are text files
+      run: |
+        for file in $(find "${GITHUB_WORKSPACE}" -type f); do
+          if [[ $(file -b "$file") == "ASCII text"* ]]; then
+            echo "File $file is a text file."
+          else
+            echo "File $file is not a text file."
+            exit 1
+          fi
+        done
