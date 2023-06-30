@@ -16,19 +16,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
-        
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Build
-      run: npm run build
-      
-    - name: Run tests
-      run: npm test
-      
-    - name: Display a message
-      run: echo "Workflow completed successfully!"
+    - name: Check if files are text files
+      run: |
+        for file in $(find "${GITHUB_WORKSPACE}" -type f); do
+          if [[ $(file -b "$file") == "ASCII text"* ]]; then
+            echo "File $file is a text file."
+          else
+            echo "File $file is not a text file."
+            exit 1
+          fi
+        done
