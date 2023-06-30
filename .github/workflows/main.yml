@@ -18,3 +18,4 @@ jobs:
           echo "Pushed file:"
           for chenged_file in ${{ steps.files.outputs.all}}; do
             echo "Changed files: ${chenged_file}"
+          done
