@@ -16,12 +16,12 @@ jobs:
       - name: Print pushed file name
         run: |
           echo "Pushed files:"
-          for changed_file in ${{ steps.files.outputs.all}}; do
+          for changed_file in ${{ steps.files.outputs.all }}; do
             echo "Changed file: ${changed_file}"
-            if file -b "${changed_file}" | grep -q "text"; then
-              echo "The file '${changed_file}' is a text file."
+            if [[ "${changed_file}" == *.txt ]]; then
+              echo "The file '${changed_file}' has a '.txt' extension."
             else
-              echo "The file '${changed_file}' is not a text file."
-              # Handle the case when the file is not a text file
+              echo "The file '${changed_file}' does not have a '.txt' extension."
+              exit 1
             fi
           done
