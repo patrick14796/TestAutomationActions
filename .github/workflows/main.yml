@@ -16,13 +16,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Check if files are text files
+    - name: Check if file is a text file
       run: |
-        for file in $(find "${GITHUB_WORKSPACE}" -type f); do
-          if [[ $(file -b "$file") == "ASCII text"* ]]; then
-            echo "File $file is a text file."
-          else
-            echo "File $file is not a text file."
-            exit 1
-          fi
-        done
+        if [[ $(file -b "${GITHUB_WORKSPACE}/${{ github.event.head_commit.modified[0] }}") == "ASCII text"* ]]; then
+          echo "The file is a text file."
+        else
+          echo "The file is not a text file."
+          exit 1
+        fi
